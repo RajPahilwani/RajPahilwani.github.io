@@ -82,16 +82,34 @@
       margin-bottom: 8px;
     }
     .parallax {
-      background: url('https://images.unsplash.com/photo-1558981033-6c947f3ec876') no-repeat center center fixed;
-      background-size: cover;
-      height: 300px;
       position: relative;
+      background: url('highres.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .parallax .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
       z-index: 0;
     }
+    .intro-wrapper {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
     .intro-text {
-      font-size: 1.8rem;
+      font-size: 2rem;
+      font-weight: bold;
       animation: slideIn 1.5s ease forwards;
       opacity: 0;
+      color: #ffffff;
     }
     @keyframes slideIn {
       from { transform: translateY(30px); opacity: 0; }
@@ -112,12 +130,13 @@
     </div>
   </header>
 
-  <div class="parallax"></div>
-
-  <section id="home">
-    <h1 class="intro-text">Hi, I'm Raj Pahilwani</h1>
-    <p class="intro-text" style="animation-delay: 0.3s; animation-fill-mode: both;">Aspiring Engineer | Physics, Robotics, and AI Enthusiast</p>
-  </section>
+  <div class="parallax">
+    <div class="overlay"></div>
+    <div class="intro-wrapper">
+      <h1 class="intro-text">Hi, I'm Raj Pahilwani</h1>
+      <p class="intro-text" style="animation-delay: 0.3s; animation-fill-mode: both;">Aspiring Engineer | Physics, Robotics, and AI Enthusiast</p>
+    </div>
+  </div>
 
   <section id="about">
     <h2>About Me</h2>
@@ -153,7 +172,7 @@
     <h2>Honors</h2>
     <div class="honor">
       <ul>
-        <li><strong>IAAC Finalist</strong> – International Astronomy and Astrophysics Competition – International</li>
+        <li><strong>IAAC Finalist</strong> – International Astronomy and Astrophysics Competition (Top 10%) – International</li>
         <li><strong>1st Place</strong> – Suitep Hackathon with NBCUniversal – School</li>
         <li><strong>2nd Place</strong> – NJAAPT Physics Olympics, Fermi Questions – State/Regional</li>
         <li><strong>2nd Place (Twice)</strong> – PhysicsBowl Region 4 Division 1 – State/Regional</li>
@@ -187,7 +206,6 @@
     function toggleTheme() {
       document.body.classList.toggle('light');
     }
-    // Animate text on load
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll('.intro-text').forEach((el, i) => {
         el.style.animation = `slideIn 1.2s ease forwards ${i * 0.3}s`;
