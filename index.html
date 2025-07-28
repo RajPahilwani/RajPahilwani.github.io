@@ -6,11 +6,24 @@
   <title>Raj Pahilwani | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-dark: #0a192f;
+      --text-dark: #ccd6f6;
+      --bg-light: #f4f4f4;
+      --text-light: #0a192f;
+      --accent: #64ffda;
+    }
     body {
       margin: 0;
       font-family: 'Fira Code', monospace;
-      background-color: #0a192f;
-      color: #ccd6f6;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    body.light {
+      background-color: var(--bg-light);
+      color: var(--text-light);
     }
     header, section {
       padding: 60px 20px;
@@ -18,34 +31,48 @@
       margin: auto;
     }
     h1, h2, h3 {
-      color: #64ffda;
+      color: var(--accent);
     }
     a {
-      color: #64ffda;
+      color: var(--accent);
       text-decoration: none;
     }
     .nav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 20px;
       background-color: #112240;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .toggle {
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      padding: 5px 10px;
+      border-radius: 5px;
     }
     .project, .activity, .honor {
       background-color: #112240;
       padding: 20px;
       margin: 20px 0;
       border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .project:hover, .activity:hover, .honor:hover {
+      transform: scale(1.02);
     }
     .btn {
       background-color: transparent;
-      border: 1px solid #64ffda;
+      border: 1px solid var(--accent);
       padding: 10px 20px;
       border-radius: 4px;
-      color: #64ffda;
+      color: var(--accent);
       transition: 0.3s;
     }
     .btn:hover {
-      background-color: #64ffda;
+      background-color: var(--accent);
       color: #0a192f;
     }
     ul {
@@ -53,6 +80,22 @@
     }
     li {
       margin-bottom: 8px;
+    }
+    .parallax {
+      background: url('https://images.unsplash.com/photo-1558981033-6c947f3ec876') no-repeat center center fixed;
+      background-size: cover;
+      height: 300px;
+      position: relative;
+      z-index: 0;
+    }
+    .intro-text {
+      font-size: 1.8rem;
+      animation: slideIn 1.5s ease forwards;
+      opacity: 0;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -65,12 +108,15 @@
       <a href="#honors">Honors</a> |
       <a href="#activities">Activities</a> |
       <a href="#contact">Contact</a>
+      <span class="toggle" onclick="toggleTheme()">🌙/☀️</span>
     </div>
   </header>
 
+  <div class="parallax"></div>
+
   <section id="home">
-    <h1>Hi, I'm Raj Pahilwani</h1>
-    <p>Aspiring Engineer | Physics, Robotics, and AI Enthusiast</p>
+    <h1 class="intro-text">Hi, I'm Raj Pahilwani</h1>
+    <p class="intro-text" style="animation-delay: 0.3s; animation-fill-mode: both;">Aspiring Engineer | Physics, Robotics, and AI Enthusiast</p>
   </section>
 
   <section id="about">
@@ -107,7 +153,7 @@
     <h2>Honors</h2>
     <div class="honor">
       <ul>
-        <li><strong>IAAC Finalist</strong> – International Astronomy and Astrophysics Competition (Top 10%) – International</li>
+        <li><strong>IAAC Finalist</strong> – International Astronomy and Astrophysics Competition – International</li>
         <li><strong>1st Place</strong> – Suitep Hackathon with NBCUniversal – School</li>
         <li><strong>2nd Place</strong> – NJAAPT Physics Olympics, Fermi Questions – State/Regional</li>
         <li><strong>2nd Place (Twice)</strong> – PhysicsBowl Region 4 Division 1 – State/Regional</li>
@@ -136,5 +182,17 @@
     <p>GitHub: <a href="https://github.com/RajPahilwani" target="_blank">RajPahilwani</a></p>
     <p>LinkedIn: <a href="#">[Add your link]</a></p>
   </section>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+    // Animate text on load
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.intro-text').forEach((el, i) => {
+        el.style.animation = `slideIn 1.2s ease forwards ${i * 0.3}s`;
+      });
+    });
+  </script>
 </body>
 </html>
