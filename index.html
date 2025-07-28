@@ -1432,6 +1432,91 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
+    // STL Loader (inline implementation since CDN doesn't have it)
+    class STLLoader extends THREE.Loader {
+      load(url, onLoad, onProgress, onError) {
+        const loader = new THREE.FileLoader(this.manager);
+        loader.setPath(this.path);
+        loader.setResponseType('arraybuffer');
+        loader.load(url, (buffer) => {
+          try {
+            onLoad(this.parse(buffer));
+          } catch (e) {
+            if (onError) {
+              onError(e);
+            } else {
+              console.error(e);
+            }
+            this.manager.itemError(url);
+          }
+        }, onProgress, onError);
+      }
+
+      parse(data) {
+        const reader = new DataView(data);
+        const faces = reader.getUint32(80, true);
+        
+        let r, g, b, hasColors = false, colors;
+        let defaultR, defaultG, defaultB, alpha;
+        
+        // Check for color
+        if (80 + 32 + (50 * faces) === reader.byteLength) {
+          hasColors = true;
+          colors = [];
+          defaultR = 0.5;
+          defaultG = 0.5;
+          defaultB = 0.5;
+          alpha = 1;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const normals = [];
+
+        for (let face = 0; face < faces; face++) {
+          const start = 84 + face * 50;
+          const normalX = reader.getFloat32(start, true);
+          const normalY = reader.getFloat32(start + 4, true);
+          const normalZ = reader.getFloat32(start + 8, true);
+
+          if (hasColors) {
+            const packedColor = reader.getUint16(start + 48, true);
+            if ((packedColor & 0x8000) === 0) {
+              r = (packedColor & 0x1F) / 31;
+              g = ((packedColor >> 5) & 0x1F) / 31;
+              b = ((packedColor >> 10) & 0x1F) / 31;
+            } else {
+              r = defaultR;
+              g = defaultG;
+              b = defaultB;
+            }
+          }
+
+          for (let i = 1; i <= 3; i++) {
+            const vertexstart = start + i * 12;
+            vertices.push(reader.getFloat32(vertexstart, true));
+            vertices.push(reader.getFloat32(vertexstart + 4, true));
+            vertices.push(reader.getFloat32(vertexstart + 8, true));
+            normals.push(normalX, normalY, normalZ);
+
+            if (hasColors) {
+              colors.push(r, g, b);
+            }
+          }
+        }
+
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+
+        if (hasColors) {
+          geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+          return geometry;
+        }
+
+        return geometry;
+      }
+    }
+
     // Theme toggle functionality
     function toggleTheme() {
       document.body.classList.toggle('light');
@@ -1439,7 +1524,7 @@
       toggle.textContent = document.body.classList.contains('light') ? '☀️ Light' : '🌙 Dark';
     }
 
-    // 3D Robot Model
+    // 3D Robot Model with STL Loading
     function init3DRobot() {
       const container = document.getElementById('robot3d');
       if (!container) return;
@@ -1455,93 +1540,137 @@
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       container.appendChild(renderer.domElement);
 
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+      // Lighting setup for STL model
+      const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
       scene.add(ambientLight);
       
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      directionalLight.position.set(10, 10, 5);
-      directionalLight.castShadow = true;
-      scene.add(directionalLight);
+      const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.6);
+      directionalLight1.position.set(10, 10, 5);
+      directionalLight1.castShadow = true;
+      scene.add(directionalLight1);
       
-      const pointLight = new THREE.PointLight(0x667eea, 0.5);
-      pointLight.position.set(-10, 0, 10);
+      const directionalLight2 = new THREE.DirectionalLight(0x667eea, 0.3);
+      directionalLight2.position.set(-10, 5, -5);
+      scene.add(directionalLight2);
+      
+      const pointLight = new THREE.PointLight(0xf093fb, 0.4);
+      pointLight.position.set(0, 10, 10);
       scene.add(pointLight);
 
-      // Robot Group
-      const robot = new THREE.Group();
+      // Loading indicator
+      const loadingText = document.createElement('div');
+      loadingText.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #667eea;
+        font-weight: 600;
+        font-size: 14px;
+        pointer-events: none;
+        z-index: 10;
+      `;
+      loadingText.textContent = '🤖 Loading Robot Model...';
+      container.appendChild(loadingText);
 
-      // Materials
-      const chassisMaterial = new THREE.MeshPhongMaterial({ color: 0x333333 });
-      const accentMaterial = new THREE.MeshPhongMaterial({ color: 0x667eea });
-      const intakeMaterial = new THREE.MeshPhongMaterial({ color: 0xf093fb });
-
-      // Chassis (main body)
-      const chassisGeometry = new THREE.BoxGeometry(4, 1, 3);
-      const chassis = new THREE.Mesh(chassisGeometry, chassisMaterial);
-      chassis.position.y = 0.5;
-      chassis.castShadow = true;
-      robot.add(chassis);
-
-      // Wheels
-      const wheelGeometry = new THREE.CylinderGeometry(0.6, 0.6, 0.3, 16);
-      const wheelMaterial = new THREE.MeshPhongMaterial({ color: 0x222222 });
+      // STL Loader
+      const loader = new STLLoader();
       
-      const positions = [
-        [-1.8, 0, -1.2], [1.8, 0, -1.2],
-        [-1.8, 0, 1.2], [1.8, 0, 1.2]
-      ];
-      
-      positions.forEach(pos => {
-        const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
-        wheel.position.set(pos[0], pos[1], pos[2]);
-        wheel.rotation.z = Math.PI / 2;
-        wheel.castShadow = true;
-        robot.add(wheel);
-      });
+      // Try to load your STL file - replace 'robot-assembly.stl' with your actual filename
+      loader.load(
+        'robot-assembly.stl', // <-- REPLACE THIS with your STL filename
+        function (geometry) {
+          // Remove loading text
+          container.removeChild(loadingText);
+          
+          // Center and scale the geometry
+          geometry.computeBoundingBox();
+          const box = geometry.boundingBox;
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          
+          // Scale to fit nicely in view
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scale = 3 / maxDim; // Adjust this value to make model bigger/smaller
+          
+          geometry.translate(-center.x, -center.y, -center.z);
+          geometry.scale(scale, scale, scale);
+          
+          // Create material with nice colors
+          const material = new THREE.MeshPhongMaterial({
+            color: 0x667eea,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.9
+          });
+          
+          // Create mesh
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+          
+          // Add to scene
+          scene.add(mesh);
+          
+          // Store reference for rotation
+          window.robotMesh = mesh;
+          
+          // Position camera appropriately
+          camera.position.set(4, 3, 4);
+          camera.lookAt(0, 0, 0);
+        },
+        function (progress) {
+          // Update loading progress
+          const percent = Math.round((progress.loaded / progress.total) * 100);
+          loadingText.textContent = `🤖 Loading Robot Model... ${percent}%`;
+        },
+        function (error) {
+          console.log('STL loading failed, using fallback model');
+          container.removeChild(loadingText);
+          
+          // Fallback to procedural robot if STL fails
+          createFallbackRobot(scene);
+          camera.position.set(5, 3, 5);
+          camera.lookAt(0, 1, 0);
+        }
+      );
 
-      // Linear slide tower
-      const towerGeometry = new THREE.BoxGeometry(0.5, 4, 0.5);
-      const tower = new THREE.Mesh(towerGeometry, accentMaterial);
-      tower.position.set(-1.5, 2.5, 0);
-      tower.castShadow = true;
-      robot.add(tower);
+      // Fallback robot function (your original robot)
+      function createFallbackRobot(scene) {
+        const robot = new THREE.Group();
+        
+        const chassisMaterial = new THREE.MeshPhongMaterial({ color: 0x333333 });
+        const accentMaterial = new THREE.MeshPhongMaterial({ color: 0x667eea });
+        const intakeMaterial = new THREE.MeshPhongMaterial({ color: 0xf093fb });
 
-      // Slide stages
-      for (let i = 0; i < 3; i++) {
-        const slideGeometry = new THREE.BoxGeometry(0.4, 0.3, 2);
-        const slide = new THREE.Mesh(slideGeometry, accentMaterial);
-        slide.position.set(-1.5, 1.5 + i * 0.4, 0);
-        slide.castShadow = true;
-        robot.add(slide);
+        // Chassis
+        const chassisGeometry = new THREE.BoxGeometry(4, 1, 3);
+        const chassis = new THREE.Mesh(chassisGeometry, chassisMaterial);
+        chassis.position.y = 0.5;
+        chassis.castShadow = true;
+        robot.add(chassis);
+
+        // Wheels
+        const wheelGeometry = new THREE.CylinderGeometry(0.6, 0.6, 0.3, 16);
+        const wheelMaterial = new THREE.MeshPhongMaterial({ color: 0x222222 });
+        
+        const positions = [
+          [-1.8, 0, -1.2], [1.8, 0, -1.2],
+          [-1.8, 0, 1.2], [1.8, 0, 1.2]
+        ];
+        
+        positions.forEach(pos => {
+          const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+          wheel.position.set(pos[0], pos[1], pos[2]);
+          wheel.rotation.z = Math.PI / 2;
+          wheel.castShadow = true;
+          robot.add(wheel);
+        });
+
+        // Add more components...
+        scene.add(robot);
+        window.robotMesh = robot;
       }
-
-      // Intake arm
-      const armGeometry = new THREE.BoxGeometry(3, 0.3, 0.3);
-      const arm = new THREE.Mesh(armGeometry, intakeMaterial);
-      arm.position.set(0.5, 2, -1.2);
-      arm.castShadow = true;
-      robot.add(arm);
-
-      // Intake claw
-      const clawGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.8);
-      const claw = new THREE.Mesh(clawGeometry, intakeMaterial);
-      claw.position.set(2, 2, -1.2);
-      claw.castShadow = true;
-      robot.add(claw);
-
-      // Scoring mechanism
-      const scorerGeometry = new THREE.BoxGeometry(1, 1, 0.5);
-      const scorer = new THREE.Mesh(scorerGeometry, accentMaterial);
-      scorer.position.set(0, 2, 1.5);
-      scorer.castShadow = true;
-      robot.add(scorer);
-
-      scene.add(robot);
-
-      // Camera position
-      camera.position.set(5, 3, 5);
-      camera.lookAt(0, 1, 0);
 
       // Mouse controls
       let isMouseDown = false;
@@ -1554,16 +1683,16 @@
       });
 
       container.addEventListener('mousemove', (event) => {
-        if (!isMouseDown) return;
+        if (!isMouseDown || !window.robotMesh) return;
         
         const deltaX = event.clientX - mouseX;
         const deltaY = event.clientY - mouseY;
         
-        robot.rotation.y += deltaX * 0.01;
-        robot.rotation.x += deltaY * 0.01;
+        window.robotMesh.rotation.y += deltaX * 0.01;
+        window.robotMesh.rotation.x += deltaY * 0.01;
         
         // Limit vertical rotation
-        robot.rotation.x = Math.max(-Math.PI/3, Math.min(Math.PI/3, robot.rotation.x));
+        window.robotMesh.rotation.x = Math.max(-Math.PI/3, Math.min(Math.PI/3, window.robotMesh.rotation.x));
         
         mouseX = event.clientX;
         mouseY = event.clientY;
@@ -1575,12 +1704,14 @@
 
       // Zoom with mouse wheel
       container.addEventListener('wheel', (event) => {
-        const zoom = event.deltaY * 0.01;
-        camera.position.multiplyScalar(1 + zoom * 0.1);
+        event.preventDefault();
+        const zoom = event.deltaY * 0.001;
+        camera.position.multiplyScalar(1 + zoom);
+        
         // Limit zoom
         const distance = camera.position.length();
-        if (distance < 3) camera.position.normalize().multiplyScalar(3);
-        if (distance > 15) camera.position.normalize().multiplyScalar(15);
+        if (distance < 2) camera.position.normalize().multiplyScalar(2);
+        if (distance > 20) camera.position.normalize().multiplyScalar(20);
       });
 
       // Animation loop
@@ -1588,8 +1719,8 @@
         requestAnimationFrame(animate);
         
         // Gentle rotation when not being controlled
-        if (!isMouseDown) {
-          robot.rotation.y += 0.005;
+        if (!isMouseDown && window.robotMesh) {
+          window.robotMesh.rotation.y += 0.005;
         }
         
         renderer.render(scene, camera);
