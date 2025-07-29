@@ -11,12 +11,12 @@
       --secondary: #764ba2;
       --accent: #f093fb;
       --accent-2: #f5576c;
-      --bg-dark: #0f0f23;
-      --bg-card: #1a1a3a;
+      --bg-dark: #0a0a0f;
+      --bg-card: #1a1a2e;
       --text-primary: #ffffff;
-      --text-secondary: #b8c5d6;
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-secondary: #a8b2d1;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
       --gradient-1: linear-gradient(135deg, var(--primary), var(--secondary));
       --gradient-2: linear-gradient(135deg, var(--accent), var(--accent-2));
       --gradient-3: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
@@ -55,15 +55,15 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
-      animation: backgroundShift 10s ease-in-out infinite alternate;
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+      animation: backgroundShift 15s ease-in-out infinite alternate;
     }
 
     @keyframes backgroundShift {
       0% { transform: translate(0px, 0px) rotate(0deg); }
-      100% { transform: translate(-10px, -10px) rotate(1deg); }
+      100% { transform: translate(-15px, -15px) rotate(2deg); }
     }
 
     /* Navigation */
@@ -72,11 +72,11 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 50px;
-      padding: 12px 30px;
+      padding: 15px 35px;
       z-index: 1000;
       transition: all 0.3s ease;
     }
@@ -84,12 +84,12 @@
     .nav-content {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 35px;
     }
 
     .logo {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 20px;
       background: var(--gradient-2);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -98,7 +98,7 @@
 
     .nav-links {
       display: flex;
-      gap: 25px;
+      gap: 30px;
     }
 
     .nav-links a {
@@ -116,7 +116,7 @@
     .nav-links a::after {
       content: '';
       position: absolute;
-      bottom: -5px;
+      bottom: -8px;
       left: 0;
       width: 0;
       height: 2px;
@@ -126,21 +126,6 @@
 
     .nav-links a:hover::after {
       width: 100%;
-    }
-
-    .theme-toggle {
-      background: var(--gradient-1);
-      border: none;
-      border-radius: 25px;
-      padding: 8px 16px;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.3s ease;
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.05);
     }
 
     /* Hero Section */
@@ -155,15 +140,15 @@
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 900px;
       z-index: 2;
     }
 
     .hero-title {
-      font-size: clamp(3rem, 8vw, 6rem);
+      font-size: clamp(3.5rem, 8vw, 7rem);
       font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
+      line-height: 1.1;
+      margin-bottom: 25px;
       background: var(--gradient-3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -172,25 +157,26 @@
     }
 
     .hero-subtitle {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-size: clamp(1.3rem, 3vw, 2rem);
       color: var(--text-secondary);
-      margin-bottom: 30px;
+      margin-bottom: 35px;
       animation: fadeInUp 1s ease-out 0.2s both;
     }
 
     .hero-description {
-      font-size: 18px;
+      font-size: 20px;
       color: var(--text-secondary);
-      margin-bottom: 40px;
-      max-width: 600px;
+      margin-bottom: 50px;
+      max-width: 650px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.6;
       animation: fadeInUp 1s ease-out 0.4s both;
     }
 
     .cta-buttons {
       display: flex;
-      gap: 20px;
+      gap: 25px;
       justify-content: center;
       flex-wrap: wrap;
       animation: fadeInUp 1s ease-out 0.6s both;
@@ -199,71 +185,44 @@
     .btn-primary {
       background: var(--gradient-2);
       color: white;
-      padding: 15px 30px;
+      padding: 18px 35px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
+      font-size: 16px;
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(240, 147, 251, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(240, 147, 251, 0.4);
     }
 
     .btn-secondary {
       background: transparent;
       color: var(--text-primary);
-      padding: 15px 30px;
+      padding: 18px 35px;
       border: 2px solid var(--glass-border);
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
+      font-size: 16px;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
     }
 
     .btn-secondary:hover {
       background: var(--glass-bg);
-      transform: translateY(-2px);
-    }
-
-    /* Floating elements */
-    .floating-element {
-      position: absolute;
-      opacity: 0.1;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .floating-element:nth-child(1) {
-      top: 20%;
-      left: 10%;
-      animation-delay: 0s;
-    }
-
-    .floating-element:nth-child(2) {
-      top: 60%;
-      right: 10%;
-      animation-delay: 2s;
-    }
-
-    .floating-element:nth-child(3) {
-      bottom: 20%;
-      left: 20%;
-      animation-delay: 4s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
+      transform: translateY(-3px);
+      border-color: var(--primary);
     }
 
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
       }
       to {
         opacity: 1;
@@ -273,154 +232,247 @@
 
     /* Sections */
     .section {
-      padding: 100px 20px;
-      max-width: 1200px;
+      padding: 120px 20px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
     .section-title {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 700;
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 80px;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Cards */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
-    }
-
-    .card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+    /* Featured Research Section */
+    .research-highlight {
+      background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 30px;
-      transition: all 0.3s ease;
+      border-radius: 30px;
+      padding: 60px;
+      margin-bottom: 80px;
       position: relative;
       overflow: hidden;
     }
 
-    .card::before {
+    .research-highlight::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 2px;
+      height: 4px;
       background: var(--gradient-2);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
     }
 
-    .card:hover::before {
+    .research-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .research-title {
+      font-size: 3rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+    }
+
+    .research-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .research-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .research-description p {
+      font-size: 20px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 35px;
+    }
+
+    .research-achievements {
+      display: grid;
+      gap: 25px;
+    }
+
+    .achievement {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--accent);
+    }
+
+    .achievement:hover {
+      transform: translateX(8px);
+      background: var(--gradient-1);
+    }
+
+    .achievement h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .achievement p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Engineering Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      padding: 40px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-2);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover::before {
       transform: scaleX(1);
     }
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    .project-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      border-color: var(--primary);
     }
 
-    .card-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 15px;
+    .project-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
       color: var(--text-primary);
     }
 
-    .card-text {
+    .project-description {
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 20px;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      font-size: 16px;
     }
 
-    .card-tags {
+    .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
     }
 
     .tag {
       background: var(--gradient-1);
       color: white;
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
       font-weight: 500;
     }
 
     /* About section */
     .about-content {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      margin-top: 50px;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
     }
 
     .about-text {
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.8;
       color: var(--text-secondary);
     }
 
     .about-text p {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 25px;
     }
 
     .skill-item {
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      padding: 20px;
+      border-radius: 20px;
+      padding: 25px;
       text-align: center;
       transition: all 0.3s ease;
     }
 
     .skill-item:hover {
-      transform: scale(1.05);
+      transform: translateY(-8px);
       background: var(--gradient-1);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
     }
 
     .skill-item h4 {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .skill-item span {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-secondary);
     }
 
     /* Honors list */
     .honors-list {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
+      margin-top: 60px;
     }
 
     .honor-item {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 20px;
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 25px;
       transition: all 0.3s ease;
       position: relative;
     }
@@ -428,529 +480,153 @@
     .honor-item::before {
       content: '🏆';
       position: absolute;
-      left: 25px;
-      top: 25px;
-      font-size: 24px;
+      left: 30px;
+      top: 30px;
+      font-size: 28px;
     }
 
     .honor-item:hover {
-      transform: translateX(10px);
+      transform: translateX(15px);
       background: var(--gradient-1);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
     }
 
     .honor-content {
-      margin-left: 50px;
+      margin-left: 60px;
     }
 
     .honor-title {
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 18px;
     }
 
     .honor-desc {
       color: var(--text-secondary);
-      font-size: 14px;
+      font-size: 15px;
+    }
+
+    /* Leadership Cards */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 35px;
+      margin-top: 60px;
+    }
+
+    .leadership-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      padding: 35px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .leadership-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-2);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .leadership-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .leadership-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .leadership-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+
+    .leadership-description {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 16px;
     }
 
     /* Contact section */
     .contact-content {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       text-align: center;
+      margin-top: 60px;
     }
 
     .contact-links {
       display: flex;
       justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
+      gap: 35px;
+      margin-top: 50px;
       flex-wrap: wrap;
     }
 
     .contact-link {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
       border-radius: 50px;
-      padding: 15px 25px;
+      padding: 18px 30px;
       color: var(--text-primary);
       text-decoration: none;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      font-weight: 500;
     }
 
     .contact-link:hover {
       background: var(--gradient-2);
-      transform: translateY(-3px);
-    }
-
-    /* Engineering Portfolio Styles */
-    .engineering-showcase {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 25px;
-      padding: 40px;
-      margin-bottom: 50px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .engineering-showcase::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: var(--gradient-2);
-    }
-
-    .showcase-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .showcase-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 10px;
-    }
-
-    .showcase-subtitle {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .showcase-content {
-      display: grid;
-      grid-template-columns: 1fr 600px;
-      gap: 40px;
-      align-items: start;
-    }
-
-    /* Project Gallery */
-    .project-gallery {
-      background: var(--bg-card);
-      border-radius: 15px;
-      padding: 25px;
-    }
-
-    .gallery-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .image-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .project-image {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      transition: all 0.3s ease;
-    }
-
-    .project-image:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: all 0.3s ease;
-    }
-
-    .project-image:hover img {
-      transform: scale(1.1);
-    }
-
-    .image-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-      color: white;
-      padding: 20px 12px 12px;
-      font-size: 13px;
-      font-weight: 600;
-      text-align: center;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-
-    .project-image:hover .image-caption {
-      transform: translateY(0);
-    }
-
-    /* Fallback for missing images */
-    .project-image img[src="linear-actuator.jpg"],
-    .project-image img[src="java-robotics-code.jpg"],
-    .project-image img[src="cs2-ai-agent.jpg"] {
-      background: var(--gradient-1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-    }
-
-    .project-image img[src="linear-actuator.jpg"]::after {
-      content: "3D Printed Linear Actuator";
-    }
-
-    .project-image img[src="java-robotics-code.jpg"]::after {
-      content: "Java Robotics Code";
-    }
-
-    .project-image img[src="cs2-ai-agent.jpg"]::after {
-      content: "AI CS2 Agent";
-    }
-
-    .showcase-description p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      margin-bottom: 30px;
-    }
-
-    .technical-specs {
-      display: grid;
-      gap: 25px;
-    }
-
-    .spec-group h4 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .spec-group ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .spec-group li {
-      padding: 8px 0;
-      padding-left: 20px;
-      position: relative;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .spec-group li::before {
-      content: '▶';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 12px;
-    }
-
-    .system-diagram {
-      background: var(--bg-card);
-      border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .diagram-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-    }
-
-    .component-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .component {
-      background: var(--glass-bg);
-      border-radius: 10px;
-      padding: 15px;
-      transition: all 0.3s ease;
-    }
-
-    .component:hover {
-      transform: scale(1.05);
-      background: var(--gradient-1);
-    }
-
-    .component-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .component-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    /* Programming Section */
-    .programming-section {
-      margin: 60px 0;
-    }
-
-    .programming-title {
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 40px;
-      background: var(--gradient-2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .programming-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-
-    .programming-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      padding: 25px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .programming-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 15px 30px rgba(240, 147, 251, 0.3);
     }
 
-    .programming-header h4 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 15px;
-    }
-
-    .programming-content p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    .code-highlight {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .code-tag {
-      background: var(--gradient-1);
-      color: white;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 500;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Hobby Project */
-    .hobby-project {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 25px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hobby-project::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: var(--gradient-1);
-    }
-
-    .hobby-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .hobby-title {
-      font-size: 2rem;
-      font-weight: 700;
-      background: var(--gradient-2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 10px;
-    }
-
-    .hobby-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .hobby-content {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .hobby-description p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      margin-bottom: 30px;
-    }
-
-    .ai-features {
-      display: grid;
-      gap: 20px;
-    }
-
-    .ai-feature {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px;
-      background: var(--bg-card);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .ai-feature:hover {
-      transform: translateX(5px);
-      background: var(--gradient-1);
-    }
-
-    .feature-icon {
-      font-size: 24px;
-      width: 40px;
-      text-align: center;
-    }
-
-    .feature-info h4 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 5px;
-    }
-
-    .feature-info p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin: 0;
-      line-height: 1.4;
-    }
-
-    .performance-metrics {
-      display: grid;
-      gap: 20px;
-    }
-
-    .metric {
-      background: var(--bg-card);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .metric:hover {
-      background: var(--gradient-2);
-      transform: scale(1.05);
-    }
-
-    .metric-value {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 5px;
-    }
-
-    .metric-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    /* Responsive Design for Engineering Section */
+    /* Responsive Design */
     @media (max-width: 768px) {
       .nav {
         top: 10px;
-        padding: 10px 20px;
+        padding: 12px 25px;
       }
 
       .nav-content {
-        gap: 15px;
+        gap: 20px;
       }
 
       .nav-links {
-        gap: 15px;
+        gap: 20px;
       }
 
-      .showcase-content {
-        grid-template-columns: 1fr;
-      }
-
-      .image-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .programming-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hobby-content {
-        grid-template-columns: 1fr;
-      }
-
-      .showcase-title {
-        font-size: 2rem;
-      }
-
-      .hobby-title {
-        font-size: 1.8rem;
-      }
-
-      .about-content {
+      .research-content {
         grid-template-columns: 1fr;
         gap: 40px;
       }
 
-      .cards-grid {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .leadership-grid {
         grid-template-columns: 1fr;
       }
 
@@ -963,13 +639,21 @@
         flex-direction: column;
         align-items: center;
       }
+
+      .research-title {
+        font-size: 2.2rem;
+      }
+
+      .section {
+        padding: 80px 20px;
+      }
     }
 
     /* Scroll animations */
     .fade-in {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
     }
 
     .fade-in.visible {
@@ -985,22 +669,17 @@
     <div class="nav-content">
       <div class="logo">Raj Pahilwani</div>
       <div class="nav-links">
-        <a href="#engineering">Engineering</a>
+        <a href="#research">Research</a>
         <a href="#projects">Projects</a>
-        <a href="#honors">Honors</a>
         <a href="#about">About</a>
-        <a href="#activities">Activities</a>
+        <a href="#honors">Honors</a>
+        <a href="#leadership">Leadership</a>
         <a href="#contact">Contact</a>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
     </div>
   </nav>
 
   <section class="hero">
-    <div class="floating-element">⚡</div>
-    <div class="floating-element">🚀</div>
-    <div class="floating-element">🤖</div>
-    
     <div class="hero-content">
       <h1 class="hero-title">Raj Pahilwani</h1>
       <p class="hero-subtitle">Computer Engineer & AI Innovator</p>
@@ -1009,191 +688,46 @@
         Building the future through innovative technology and groundbreaking research.
       </p>
       <div class="cta-buttons">
-        <a href="#engineering" class="btn-primary">View Engineering Work</a>
+        <a href="#research" class="btn-primary">View Research</a>
         <a href="resume.pdf" class="btn-secondary">Download Resume</a>
       </div>
     </div>
   </section>
 
-  <section id="engineering" class="section">
-    <h2 class="section-title fade-in">Engineering Portfolio</h2>
+  <section id="research" class="section">
+    <h2 class="section-title fade-in">Featured Research</h2>
     
-    <!-- Featured Engineering Project -->
-    <div class="engineering-showcase fade-in">
-      <div class="showcase-header">
-        <h3 class="showcase-title">Advanced Engineering Projects</h3>
-        <p class="showcase-subtitle">Precision Control Systems & 3D Printed Actuators</p>
+    <div class="research-highlight fade-in">
+      <div class="research-header">
+        <h3 class="research-title">Quantum Computing Research</h3>
+        <p class="research-subtitle">Roaring Cubs Collective - Columbia University Collaboration</p>
       </div>
       
-      <div class="showcase-content">
-        <div class="showcase-description">
+      <div class="research-content">
+        <div class="research-description">
           <p>
-            Designed and developed multiple advanced engineering systems including a fully 3D printed linear actuator 
-            and competitive robotics arms featuring multi-axis precision control and performance optimization using computer vision.
+            As a Roaring Cubs STEM Scholar, I conducted groundbreaking research on photonic qubit efficiency, 
+            collaborating directly with Columbia University mentors to explore real-world quantum computing applications 
+            and their potential impact on computational science.
           </p>
-          
-          <div class="technical-specs">
-            <div class="spec-group">
-              <h4>🔧 3D Printed Linear Actuator</h4>
-              <ul>
-                <li>Fully 3D printed linear actuator with herringbone gear system</li>
-                <li>Gearmotor-powered with custom designed structural components</li>
-                <li>All parts designed for home 3D printing capabilities</li>
-                <li>Compact form factor focusing on safe, strong, and smooth motion</li>
-                <li>Low-cost alternative to commercial linear actuators</li>
-              </ul>
-            </div>
-            
-            <div class="spec-group">
-              <h4>🤖 FTC Robotics System</h4>
-              <ul>
-                <li>Multi-servo positional control system (X, Y, Z axes)</li>
-                <li>Three-stage cascading linear slide mechanism</li>
-                <li>Mecanum drive system with omnidirectional movement</li>
-                <li>Integrated scoring claw and intake/output arm</li>
-                <li>Advanced autonomous navigation with PID control</li>
-              </ul>
-            </div>
-            
-            <div class="spec-group">
-              <h4>💻 AI & Software Development</h4>
-              <ul>
-                <li>CS2 AI agent with 97.3% detection accuracy using YOLOv8</li>
-                <li>Java-based autonomous control systems for robotics</li>
-                <li>Real-time computer vision and behavioral mimicry</li>
-                <li>Sub-millisecond response times for competitive applications</li>
-              </ul>
-            </div>
-          </div>
+          <p>
+            Led a comprehensive research presentation at Columbia's Science Enrichment Month on skin cancer and 
+            the science behind it, educating over 200 students about the intersection of physics, biology, and medical technology.
+          </p>
         </div>
         
-        <div class="showcase-visual">
-          <div class="project-gallery">
-            <div class="gallery-title">Engineering Projects Gallery</div>
-            <div class="image-grid">
-              <div class="project-image">
-                <img src="linear-actuator.jpg" alt="3D Printed Linear Actuator" loading="lazy" />
-                <div class="image-caption">3D Printed Linear Actuator - Herringbone Gear System</div>
-              </div>
-              <div class="project-image">
-                <img src="highres.jpeg" alt="FTC Robot Assembly" loading="lazy" />
-                <div class="image-caption">FTC Robot - Complete Assembly</div>
-              </div>
-              <div class="project-image">
-                <img src="java-robotics-code.jpg" alt="Java Robotics Code" loading="lazy" />
-                <div class="image-caption">Java Programming - Autonomous Control Systems</div>
-              </div>
-              <div class="project-image">
-                <img src="cs2-ai-agent.jpg" alt="CS2 AI Agent" loading="lazy" />
-                <div class="image-caption">AI CS2 Agent - Computer Vision & Real-time Processing</div>
-              </div>
-            </div>
+        <div class="research-achievements">
+          <div class="achievement">
+            <h4>Published Research</h4>
+            <p>Photonic qubit efficiency optimization with Columbia University mentors</p>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Programming Section -->
-    <div class="programming-section fade-in">
-      <h3 class="programming-title">Advanced Programming Solutions</h3>
-      <div class="programming-grid">
-        <div class="programming-card">
-          <div class="programming-header">
-            <h4>🎮 Tele-Operated Control</h4>
+          <div class="achievement">
+            <h4>Research Presentation</h4>
+            <p>Presented at Columbia's Science Enrichment Month to 200+ students</p>
           </div>
-          <div class="programming-content">
-            <p>Developed responsive control modes with optimized input debounce timing for competitive gameplay precision.</p>
-            <div class="code-highlight">
-              <span class="code-tag">Input Processing</span>
-              <span class="code-tag">Debounce Logic</span>
-              <span class="code-tag">Real-time Response</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="programming-card">
-          <div class="programming-header">
-            <h4>🔄 PID Control Systems</h4>
-          </div>
-          <div class="programming-content">
-            <p>Implemented negative feedback control loops using PID and custom motion profiling through hyperbolic tangent functions.</p>
-            <div class="code-highlight">
-              <span class="code-tag">PID Controllers</span>
-              <span class="code-tag">Motion Profiling</span>
-              <span class="code-tag">Stability Control</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="programming-card">
-          <div class="programming-header">
-            <h4> Autonomous Navigation</h4>
-          </div>
-          <div class="programming-content">
-            <p>Programmed and tuned autonomous modes using the Roadrunner library for accurate field positioning and path following.</p>
-            <div class="code-highlight">
-              <span class="code-tag">Roadrunner</span>
-              <span class="code-tag">Path Planning</span>
-              <span class="code-tag">Field Positioning</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hobby Project -->
-    <div class="hobby-project fade-in">
-      <div class="hobby-header">
-        <h3 class="hobby-title"> AI Gaming System - Counter-Strike Bot</h3>
-        <p class="hobby-subtitle">Autonomous Real-Time Gaming AI</p>
-      </div>
-      
-      <div class="hobby-content">
-        <div class="hobby-description">
-          <p>
-            Designed and implemented an advanced AI system capable of playing Counter-Strike autonomously, 
-            utilizing computer vision and machine learning for real-time decision making.
-          </p>
-          
-          <div class="ai-features">
-            <div class="ai-feature">
-              <div class="feature-icon">👁</div>
-              <div class="feature-info">
-                <h4>YOLO Object Detection</h4>
-                <p>Real-time analysis of in-game environments and player actions</p>
-              </div>
-            </div>
-            
-            <div class="ai-feature">
-              <div class="feature-icon"></div>
-              <div class="feature-info">
-                <h4>Behavioral Mimicry</h4>
-                <p>AI learns and replicates human player strategies and movements</p>
-              </div>
-            </div>
-            
-            <div class="ai-feature">
-              <div class="feature-icon"></div>
-              <div class="feature-info">
-                <h4>Real-Time Processing</h4>
-                <p>Sub-millisecond response times for competitive gameplay</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="performance-metrics">
-          <div class="metric">
-            <div class="metric-value">97.3%</div>
-            <div class="metric-label">Detection Accuracy</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">5000+</div>
-            <div class="metric-label">Training Frames</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">&lt;16ms</div>
-            <div class="metric-label">Response Time</div>
+          <div class="achievement">
+            <h4>IAAC Finalist</h4>
+            <p>International Astronomy and Astrophysics Competition recognition</p>
           </div>
         </div>
       </div>
@@ -1201,61 +735,114 @@
   </section>
 
   <section id="projects" class="section">
-    <h2 class="section-title fade-in">Featured Projects</h2>
-    <div class="cards-grid">
-      <div class="card fade-in">
-        <h3 class="card-title">FTC Robotics: Team 17496</h3>
-        <p class="card-text">
+    <h2 class="section-title fade-in">Engineering Projects</h2>
+    
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <h3 class="project-title">FTC Robotics: Team 17496</h3>
+        <p class="project-description">
           Led programming efforts for competitive robotics team, developing sophisticated Java-based 
-          autonomous control systems and integrating cutting-edge AI-powered object detection.
+          autonomous control systems with multi-servo positional control, three-stage cascading linear slides, 
+          and advanced PID navigation systems.
         </p>
-        <div class="card-tags">
+        <div class="project-tags">
           <span class="tag">Java</span>
           <span class="tag">Computer Vision</span>
           <span class="tag">Autonomous Systems</span>
           <span class="tag">3D Modeling</span>
+          <span class="tag">PID Control</span>
         </div>
       </div>
 
-      <div class="card fade-in">
-        <h3 class="card-title">AI-Powered Invoice System</h3>
-        <p class="card-text">
+      <div class="project-card fade-in">
+        <h3 class="project-title">AI-Powered Invoice System</h3>
+        <p class="project-description">
           Built a comprehensive full-stack invoice reconciliation system with natural language 
-          understanding, anomaly detection, and seamless integration with major communication platforms.
+          understanding, anomaly detection, and seamless integration with major communication platforms 
+          using modern web technologies.
         </p>
-        <div class="card-tags">
+        <div class="project-tags">
           <span class="tag">NLU</span>
           <span class="tag">Full-Stack</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">Vue3</span>
           <span class="tag">Automation</span>
-          <span class="tag">Dashboard</span>
         </div>
       </div>
 
-      <div class="card fade-in">
-        <h3 class="card-title">Quantum Computing Research</h3>
-        <p class="card-text">
-          Published groundbreaking research on photonic qubit efficiency as a Roaring Cubs STEM Scholar, 
-          collaborating with Columbia University mentors on real-world quantum applications.
+      <div class="project-card fade-in">
+        <h3 class="project-title">3D Printed Linear Actuator</h3>
+        <p class="project-description">
+          Designed and manufactured a fully 3D printed linear actuator featuring herringbone gear systems, 
+          gearmotor integration, and optimized structural components for safe, strong, and smooth motion control.
         </p>
-        <div class="card-tags">
-          <span class="tag">Quantum Computing</span>
-          <span class="tag">Research</span>
-          <span class="tag">Physics</span>
-          <span class="tag">Publications</span>
+        <div class="project-tags">
+          <span class="tag">3D Printing</span>
+          <span class="tag">Mechanical Design</span>
+          <span class="tag">Onshape CAD</span>
+          <span class="tag">Gear Systems</span>
         </div>
       </div>
 
-      <div class="card fade-in">
-        <h3 class="card-title">CS2 AI Gaming Bot</h3>
-        <p class="card-text">
+      <div class="project-card fade-in">
+        <h3 class="project-title">CS2 AI Gaming Bot</h3>
+        <p class="project-description">
           Developed an intelligent game-playing AI using YOLOv8 and reinforcement learning, 
-          achieving 97.3% detection accuracy through training on 5,000+ labeled frames.
+          achieving 97.3% detection accuracy through training on 5,000+ labeled frames with 
+          sub-millisecond response times.
         </p>
-        <div class="card-tags">
+        <div class="project-tags">
           <span class="tag">YOLOv8</span>
           <span class="tag">Reinforcement Learning</span>
           <span class="tag">Computer Vision</span>
           <span class="tag">Real-time AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2 class="section-title fade-in">About Me</h2>
+    <div class="about-content fade-in">
+      <div class="about-text">
+        <p>
+          I'm a rising senior at the Academy for Math, Science, and Engineering in Rockaway, NJ, 
+          where I've discovered my passion for pushing the boundaries of technology and science.
+        </p>
+        <p>
+          My journey spans from programming autonomous robots to developing AI-powered systems, 
+          and from quantum computing research to machine learning applications. I believe in 
+          using technology to solve real-world problems and create meaningful impact.
+        </p>
+        <p>
+          When I'm not coding or researching, you can find me mentoring fellow students, 
+          performing with the marching band, or volunteering in my community.
+        </p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <h4>Full-Stack</h4>
+          <span>Laravel, Vue3</span>
+        </div>
+        <div class="skill-item">
+          <h4>Programming</h4>
+          <span>Java, Python, C++</span>
+        </div>
+        <div class="skill-item">
+          <h4>AI/ML</h4>
+          <span>TensorFlow, PyTorch</span>
+        </div>
+        <div class="skill-item">
+          <h4>Robotics</h4>
+          <span>FTC, Autonomous Control</span>
+        </div>
+        <div class="skill-item">
+          <h4>Research</h4>
+          <span>Quantum Computing</span>
+        </div>
+        <div class="skill-item">
+          <h4>3D Modeling</h4>
+          <span>Onshape, CAD</span>
         </div>
       </div>
     </div>
@@ -1297,71 +884,28 @@
     </div>
   </section>
 
-  <section id="about" class="section">
-    <h2 class="section-title fade-in">About Me</h2>
-    <div class="about-content fade-in">
-      <div class="about-text">
-        <p>
-          I'm a rising senior at the Academy for Math, Science, and Engineering in Rockaway, NJ, 
-          where I've discovered my passion for pushing the boundaries of technology and science.
-        </p>
-        <p>
-          My journey spans from programming autonomous robots to developing AI-powered systems, 
-          and from quantum computing research to machine learning applications. I believe in 
-          using technology to solve real-world problems and create meaningful impact.
-        </p>
-        <p>
-          When I'm not coding or researching, you can find me mentoring fellow students, 
-          performing with the marching band, or volunteering in my community.
-        </p>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-item">
-          <h4>Programming</h4>
-          <span>Java, Python, C++</span>
-        </div>
-        <div class="skill-item">
-          <h4>AI/ML</h4>
-          <span>TensorFlow, PyTorch</span>
-        </div>
-        <div class="skill-item">
-          <h4>Robotics</h4>
-          <span>FTC, Autonomous Control</span>
-        </div>
-        <div class="skill-item">
-          <h4>Research</h4>
-          <span>Quantum Computing</span>
-        </div>
-        <div class="skill-item">
-          <h4>Full-Stack</h4>
-          <span>React, Node.js</span>
-        </div>
-        <div class="skill-item">
-          <h4>3D Modeling</h4>
-          <span>Onshape, CAD</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="activities" class="section">
+  <section id="leadership" class="section">
     <h2 class="section-title fade-in">Leadership & Activities</h2>
-    <div class="cards-grid">
-      <div class="card fade-in">
-        <h3 class="card-title">Physics Club Co-President</h3>
-        <p class="card-text">Leading competition efforts and mentoring peers while expanding STEM opportunities throughout the school community.</p>
+    <div class="leadership-grid">
+      <div class="leadership-card fade-in">
+        <h3 class="leadership-title">Physics Club Co-President</h3>
+        <p class="leadership-description">Leading competition efforts and mentoring peers while expanding STEM opportunities throughout the school community and organizing physics competitions.</p>
       </div>
-      <div class="card fade-in">
-        <h3 class="card-title">NYAS Research Team Lead</h3>
-        <p class="card-text">Directed international team exploring AI explainability using LIME and SHAP to analyze algorithmic bias.</p>
+      <div class="leadership-card fade-in">
+        <h3 class="leadership-title">NYAS Research Team Lead</h3>
+        <p class="leadership-description">Directed international team exploring AI explainability using LIME and SHAP to analyze algorithmic bias and improve machine learning transparency.</p>
       </div>
-      <div class="card fade-in">
-        <h3 class="card-title">Community Volunteer</h3>
-        <p class="card-text">143+ hours teaching underserved youth, advising nonprofits, and providing disaster readiness services through SEWA & FEMA.</p>
+      <div class="leadership-card fade-in">
+        <h3 class="leadership-title">FLL Team Mentor</h3>
+        <p class="leadership-description">Mentor a FIRST Lego League team of young neurodivergent students, providing guidance in robotics programming, design thinking, and competitive preparation.</p>
       </div>
-      <div class="card fade-in">
-        <h3 class="card-title">Marching Band Percussionist</h3>
-        <p class="card-text">Performing on quads/snare and mentoring new percussionists through competitive band seasons.</p>
+      <div class="leadership-card fade-in">
+        <h3 class="leadership-title">Community Volunteer</h3>
+        <p class="leadership-description">143+ hours teaching underserved youth, advising nonprofits, and providing disaster readiness services through SEWA & FEMA community programs.</p>
+      </div>
+      <div class="leadership-card fade-in">
+        <h3 class="leadership-title">Marching Band Percussionist</h3>
+        <p class="leadership-description">Performing on quads/snare and mentoring new percussionists through competitive band seasons, developing teamwork and precision skills.</p>
       </div>
     </div>
   </section>
@@ -1369,31 +913,24 @@
   <section id="contact" class="section">
     <h2 class="section-title fade-in">Let's Connect</h2>
     <div class="contact-content fade-in">
-      <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 30px;">
+      <p style="font-size: 20px; color: var(--text-secondary); margin-bottom: 30px;">
         I'm always excited to discuss new opportunities, collaborations, or innovative projects.
       </p>
       <div class="contact-links">
         <a href="mailto:rajpahilwani@gmail.com" class="contact-link">
-          📧 Email
+          Email
         </a>
         <a href="https://github.com/RajPahilwani" class="contact-link" target="_blank">
-          💻 GitHub
+          GitHub
         </a>
         <a href="#" class="contact-link">
-          💼 LinkedIn
+          LinkedIn
         </a>
       </div>
     </div>
   </section>
 
   <script>
-    // Theme toggle functionality
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-      const toggle = document.querySelector('.theme-toggle');
-      toggle.textContent = document.body.classList.contains('light') ? '☀️ Light' : '🌙 Dark';
-    }
-
     // Scroll animations
     const observerOptions = {
       threshold: 0.1,
@@ -1428,13 +965,24 @@
       });
     });
 
-    // Add parallax effect to hero section
+    // Add subtle parallax effect to hero section
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       const hero = document.querySelector('.hero');
-      if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      if (hero && scrolled < window.innerHeight) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
       }
+    });
+
+    // Enhanced hover effects for cards
+    document.querySelectorAll('.project-card, .leadership-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-15px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
     });
   </script>
 </body>
